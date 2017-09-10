@@ -1,7 +1,9 @@
+const mongoose = require('mongoose');
+
 // Define schema
 var Schema = mongoose.Schema;
 
-var SomeModelSchema = new Schema({
+var myproduct = new Schema({
     name: String,
     price: Number,
     date: String,
@@ -9,7 +11,7 @@ var SomeModelSchema = new Schema({
 });
 
 // Compile model from schema
-var Product = mongoose.model('products', Schema);
+var Product = mongoose.model('products', myproduct);
 
 //Export model
 module.exports = Product;

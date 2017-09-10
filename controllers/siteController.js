@@ -16,7 +16,7 @@ router.get('/', function(req, res) {
         })
     }
 
-    dbClient.getData("products", {}, callback)
+    dbClient.getData({}, callback)
 
 });
 
