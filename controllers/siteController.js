@@ -29,9 +29,9 @@ router.get('/item-:productid', (req, res) => {
             product: product[0]
         })
     }
-    query = ObjectId(productid);
+    const query = ObjectId(productid);
 
-    dbClient.getData("products", query, callback)
+    dbClient.getData(query, callback)
 
 });
 
@@ -40,18 +40,28 @@ router.get('/admin', function(req, res) {
 });
 
 router.post('/add-product', function(req, res) {
+    // let newProduct = req.fields;
+    // dbClient.insertData(newProduct)
+
+    // const callback = (err, product) => {
+    //     res.render('index', {
+    //         product: product
+    //     })
+    // }
+
+    // dbClient.getData({}, callback)
+
     let newProduct = req.fields;
-    dbClient.insertData("products", newProduct)
-
-    const callback = (err, product) => {
-        res.render('index', {
-            product: product
-        })
+    const callBack = (error, posts) => {
+        if (error) {
+            console.error(error);
+            return res.redirect('/error');
+        }
+        //const producty = req.fields;
+        //console.log(producty);
+        return res.redirect('/');
     }
-
-    dbClient.getData("products", {}, callback)
-
-
+    dbClient.insertData(newProduct, callBack);
 });
 
 module.exports = router;
