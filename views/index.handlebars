@@ -2,6 +2,9 @@
 
 <ul>
     {{#each product}}
-      <a href="item-{{this._id}}">  <li>{{this.name}}</li></id></a>
-    {{/each}}
+      <a href="item-{{this._id}}"><li>{{this.name}}</li></id></a>
+       <a href="delete-{{this._id}}"><button>Delete</button></a>
+     {{/each}}
  </ul>   
+
+<!-- method="DELETE" -->

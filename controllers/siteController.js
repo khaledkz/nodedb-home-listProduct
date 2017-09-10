@@ -15,15 +15,11 @@ router.get('/', function(req, res) {
             product: product
         })
     }
-
     dbClient.getData({}, callback)
-
 });
 
 router.get('/item-:productid', (req, res) => {
-
     const productid = req.params.productid;
-
     const callback = (err, product) => {
         res.render('single-item', {
             product: product[0]
@@ -33,6 +29,23 @@ router.get('/item-:productid', (req, res) => {
 
     dbClient.getData(query, callback)
 
+});
+
+router.get('/delete-:productid', (req, res) => {
+    const productid = req.params.productid;
+    const query = ObjectId(productid);
+    console.log(query)
+    const callBack = (error, posts) => {
+        if (error) {
+            console.error(error);
+            return res.redirect('/error');
+        }
+
+        return res.redirect('/');
+    }
+
+    const myquery = { "_id": query };
+    dbClient.deleteData(myquery, callBack);
 });
 
 router.get('/admin', function(req, res) {
@@ -62,6 +75,7 @@ router.post('/add-product', function(req, res) {
         return res.redirect('/');
     }
     dbClient.insertData(newProduct, callBack);
+
 });
 
 module.exports = router;
